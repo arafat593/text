@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rockstar Login – Secure Account Access</title>
+
+  <!-- SEO Meta Tags -->
+  <meta name="description" content="Official Rockstar login page. Sign in securely to your Rockstar account with email and password." />
+  <meta name="keywords" content="Rockstar login, Rockstar account, Rockstar sign in, Rockstar secure access, Rockstar games login" />
+  <meta name="author" content="Arafat" />
+  <link rel="canonical" href="https://your-domain.com/" />
+
+  <!-- Open Graph (Facebook, WhatsApp share) -->
+  <meta property="og:title" content="Rockstar Login – Secure Account Access" />
+  <meta property="og:description" content="Sign in securely to your Rockstar account with email and password." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://your-domain.com/" />
+  <meta property="og:image" content="https://your-domain.com/rockstar-login.png" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Rockstar Login – Secure Account Access" />
+  <meta name="twitter:description" content="Sign in securely to your Rockstar account with email and password." />
+  <meta name="twitter:image" content="https://your-domain.com/rockstar-login.png" />
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Fonts -->
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #f3f4f6;
+    }
+  </style>
+</head>
+<body class="flex items-center justify-center min-h-screen bg-gray-100 p-4">
+  <div class="bg-white p-8 rounded-2xl shadow-xl w-full max-w-sm transform transition-all duration-300 hover:scale-105">
+    <div class="flex flex-col items-center mb-6">
+      <svg class="w-16 h-16 text-indigo-600 mb-2 transform transition-all duration-300 hover:rotate-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v2a3 3 0 01-3 3H6a3 3 0 01-3-3v-2m5-11h8a2 2 0 012 2v10a2 2 0 01-2 2h-8a2 2 0 01-2-2V7a2 2 0 012-2z"></path>
+      </svg>
+      <h1 class="text-3xl font-bold text-gray-800">Rockstar Login</h1>
+      <p class="text-sm text-gray-500 mt-2">Sign in to your Rockstar account</p>
+    </div>
+    <form id="loginForm" class="space-y-4">
+      <div>
+        <label for="email" class="block text-sm font-medium text-gray-700">Email Address</label>
+        <input type="email" id="email" name="email" required placeholder="your.email@example.com"
+          class="mt-1 block w-full px-4 py-2 bg-gray-50 border border-gray-300 rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm transition-all duration-200 focus:bg-white">
+      </div>
+      <div>
+        <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
+        <input type="password" id="password" name="password" required placeholder="••••••••"
+          class="mt-1 block w-full px-4 py-2 bg-gray-50 border border-gray-300 rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm transition-all duration-200 focus:bg-white">
+      </div>
+      <div class="flex items-center justify-between">
+        <div class="flex items-center">
+          <input id="remember_me" name="remember_me" type="checkbox" class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded">
+          <label for="remember_me" class="ml-2 block text-sm text-gray-900">Remember me</label>
+        </div>
+        <a href="#" class="text-sm text-indigo-600 hover:text-indigo-500 font-medium transition-colors duration-200">Forgot password?</a>
+      </div>
+      <div class="relative pt-4">
+        <button type="submit"
+          class="w-full flex justify-center py-2 px-4 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transform transition-all duration-300 hover:scale-105">
+          Sign in
+        </button>
+        <div id="messageBox" class="absolute inset-x-0 bottom-full mb-4 px-4 py-3 text-sm text-center bg-green-500 text-white rounded-lg shadow-lg hidden"></div>
+      </div>
+    </form>
+    <p class="mt-6 text-center text-sm text-gray-600">
+      Don't have an account?
+      <a href="#" class="font-medium text-indigo-600 hover:text-indigo-500 transition-colors duration-200">Sign up</a>
+    </p>
+  </div>
+
+  <script>
+    const loginForm = document.getElementById('loginForm');
+    const messageBox = document.getElementById('messageBox');
+
+    loginForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+
+      if (email === '' || password === '') {
+        showMessage("Please fill out all fields.", "bg-red-500");
+        return;
+      }
+
+      showMessage("Login successful! Redirecting...", "bg-green-500");
+
+      // Example redirect (you can change it)
+      // setTimeout(() => {
+      //   window.location.href = '/dashboard';
+      // }, 2000);
+    });
+
+    function showMessage(message, colorClass) {
+      messageBox.textContent = message;
+      messageBox.className = `absolute inset-x-0 bottom-full mb-4 px-4 py-3 text-sm text-center text-white rounded-lg shadow-lg block ${colorClass} transform scale-0 opacity-0 transition-all duration-300`;
+
+      setTimeout(() => {
+        messageBox.classList.add('scale-100', 'opacity-100');
+      }, 10);
+
+      setTimeout(() => {
+        messageBox.classList.remove('scale-100', 'opacity-100');
+        messageBox.classList.add('scale-0', 'opacity-0');
+      }, 3000);
+    }
+  </script>
+</body>
+</html>
